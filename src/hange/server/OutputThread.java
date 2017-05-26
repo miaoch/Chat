@@ -53,17 +53,23 @@ public class OutputThread extends Thread {
                     oos.flush();
                 }
             }
-            // 循环结束后，关闭流，释放资源
-            if (oos != null) {
-                oos.close();
-            }
-            if (socket != null) {
-                socket.close();
-            }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                // 循环结束后，关闭流，释放资源
+                if (oos != null) {
+                    oos.close();
+                }
+                if (socket != null) {
+                    socket.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
